@@ -1,0 +1,46 @@
+Sub formato_notas()
+    Dim ws As Worksheet
+    Dim i As Integer
+    Dim promedio As Double
+    
+    ' Establece la hoja de trabajo (puedes cambiar "Hoja1" al nombre de tu hoja)
+    Set ws = ThisWorkbook.Sheets("Hoja1")
+    
+    ' Recorre las filas de la 6 a la 20
+    For i = 6 To 20
+        ' Calcula el promedio de las celdas F, G y H en la fila i
+        promedio = Application.WorksheetFunction.Average(ws.Range("F" & i & ":H" & i))
+        
+        ' Coloca el promedio en la columna I
+        ws.Range("I" & i).Value = promedio
+        
+        ' Aplica formato condicional
+        If ws.Range("F" & i).Value < 10.5 Then
+            ws.Range("F" & i).Font.Color = RGB(255, 0, 0)
+        Else
+            ws.Range("F" & i).Font.Color = RGB(12, 183, 242)
+        End If
+        
+        If ws.Range("G" & i).Value < 10.5 Then
+            ws.Range("G" & i).Font.Color = RGB(255, 0, 0)
+        Else
+            ws.Range("G" & i).Font.Color = RGB(12, 183, 242)
+        End If
+        
+        If ws.Range("H" & i).Value < 10.5 Then
+            ws.Range("H" & i).Font.Color = RGB(255, 0, 0)
+        Else
+            ws.Range("H" & i).Font.Color = RGB(12, 183, 242)
+        End If
+        
+        If promedio < 10.5 Then
+            ws.Range("I" & i).Font.Color = RGB(255, 0, 0)
+        Else
+            ws.Range("I" & i).Font.Color = RGB(12, 183, 242)
+        End If
+    Next i
+End Sub
+
+Sub limpiar_formato()
+Hoja1.Range("F6:I20").ClearFormats
+End Sub
